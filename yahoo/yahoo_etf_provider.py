@@ -7,8 +7,8 @@ from web_scraper import ScrapingConfig, WebScraper
 
 
 class YahooETFProvider(BaseDataProvider):
-
     def get_stocks(self, count: int = 50) -> Optional[pd.DataFrame]:
+
         config_obj = ScrapingConfig(
             url='https://finance.yahoo.com/markets/etfs/most-active/?start=0&count=100',
             parent_tag='table',
@@ -21,5 +21,6 @@ class YahooETFProvider(BaseDataProvider):
         df = WebScraper.scrape_stocks(config_obj)
         if df is not None:
             df['market'] = 'us'
+            df['category'] = 'etf'
 
         return df.head(count) if df is not None else None

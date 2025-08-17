@@ -20,5 +20,6 @@ class TradingViewETFProvider(BaseDataProvider):
         df = WebScraper.scrape_stocks(config_obj)
         if df is not None:
             df['market'] = 'us'
+            df['category'] = 'etf'
 
         return df.head(count) if df is not None else None

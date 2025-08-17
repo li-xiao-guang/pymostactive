@@ -6,20 +6,21 @@ from base_data_provider import BaseDataProvider
 from web_scraper import ScrapingConfig, WebScraper
 
 
-class TradingViewStockProvider(BaseDataProvider):
-
+class YahooCryptoProvider(BaseDataProvider):
     def get_stocks(self, count: int = 50) -> Optional[pd.DataFrame]:
+
         config_obj = ScrapingConfig(
-            url='https://www.tradingview.com/markets/stocks-usa/market-movers-active/',
-            symbol_tag='a',
-            symbol_attrs={'class': 'tickerNameBox-GrtoTeat'},
-            name_tag='sup',
-            name_attrs={'class': 'tickerDescription-GrtoTeat'}
+            url='https://finance.yahoo.com/markets/crypto/most-active/?start=0&count=100',
+            parent_tag='table',
+            symbol_tag='span',
+            symbol_attrs={'class': 'symbol'},
+            name_tag='a',
+            name_attrs={'class': 'ticker'}
         )
 
         df = WebScraper.scrape_stocks(config_obj)
         if df is not None:
             df['market'] = 'us'
-            df['category'] = 'stock'
+            df['category'] = 'crypto'
 
         return df.head(count) if df is not None else None

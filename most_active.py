@@ -3,8 +3,13 @@ from typing import Optional
 import pandas as pd
 
 from tradingview.tradingview_china_stock_provider import TradingViewChinaStockProvider
+from tradingview.tradingview_crypto_provider import TradingViewCryptoProvider
 from tradingview.tradingview_etf_provider import TradingViewETFProvider
+from tradingview.tradingview_hk_stock_provider import TradingViewHKStockProvider
+from tradingview.tradingview_japan_stock_provider import TradingViewJapanStockProvider
 from tradingview.tradingview_stock_provider import TradingViewStockProvider
+from tradingview.tradingview_uk_stock_provider import TradingViewUKStockProvider
+from yahoo.yahoo_crypto_provider import YahooCryptoProvider
 from yahoo.yahoo_etf_provider import YahooETFProvider
 from yahoo.yahoo_stock_provider import YahooStockProvider
 
@@ -24,6 +29,8 @@ class MostActive:
                     providers.append(YahooStockProvider())
                 if category == 'etf' or category == 'all':
                     providers.append(YahooETFProvider())
+                if category == 'crypto' or category == 'all':
+                    providers.append(YahooCryptoProvider())
 
         if resource == 'tradingview' or resource == 'all':
             if market == 'us' or market == 'all':
@@ -31,9 +38,20 @@ class MostActive:
                     providers.append(TradingViewStockProvider())
                 if category == 'etf' or category == 'all':
                     providers.append(TradingViewETFProvider())
+                if category == 'crypto' or category == 'all':
+                    providers.append(TradingViewCryptoProvider())
+            if market == 'uk' or market == 'all':
+                if category == 'stock' or category == 'all':
+                    providers.append(TradingViewUKStockProvider())
             if market == 'china' or market == 'all':
                 if category == 'stock' or category == 'all':
                     providers.append(TradingViewChinaStockProvider())
+            if market == 'hk' or market == 'all':
+                if category == 'stock' or category == 'all':
+                    providers.append(TradingViewHKStockProvider())
+            if market == 'japan' or market == 'all':
+                if category == 'stock' or category == 'all':
+                    providers.append(TradingViewJapanStockProvider())
 
         combined_df = None
         for provider in providers:
@@ -53,7 +71,7 @@ class MostActive:
 
 if __name__ == '__main__':
     most_active = MostActive()
-    result = most_active.download(market='us')
+    result = most_active.download(market='uk')
     if result is not None:
         print(result)
     else:
