@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyMostActive"
-version = "0.1.0"
-description = "Grab the most active stock list"
+version = "0.1.1"
+description = "Retrieve the list of most active stocks from major financial websites."
 readme = "README.md"
 authors = [
     { name = "Steven Li", email = "sli@live.ca" }

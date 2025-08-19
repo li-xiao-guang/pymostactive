@@ -4,13 +4,31 @@ Retrieve the list of most active stocks from major financial websites.
 
 ### Currently Supported:
 
-* **Financial websites**: Yahoo Finance, TradingView
-* **Stock markets**: US, UK, CHINA, HK, JAPAN
-* **Assets**: STOCKS, ETFS, CRYPTO
+#### Resources:
+
+    class Resource(Enum):
+        YAHOO = 'yahoo'
+        TRADINGVIEW = 'tradingview'
+
+#### Markets:
+
+    class Market(Enum):
+        US = "us"
+        UK = "uk"
+        CHINA = "china"
+        HK = "hk"
+        JAPAN = "japan"
+
+#### Assets:
+
+    class Asset(Enum):
+        STOCKS = "stocks"
+        ETFS = "etfs"
+        CRYPTO = "crypto"
 
 ### Example:
 
-    from pymostactive.most_active import MostActive
+    from pymostactive import MostActive
 
     most_active = MostActive()
     result = most_active.download(resource=Resource.YAHOO,
